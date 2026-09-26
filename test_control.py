@@ -3,30 +3,29 @@ import time
 
 step_time = 0.02
 step_pause = 0.15
-facing = "up"
+facing = "down"
 
 def press_a():
-    pyautogui.press("z")
+    pyautogui.keyDown("z")
+    time.sleep(0.02)
+    pyautogui.keyUp("z")
     time.sleep(0.3)
 
 def press_direction(direction):
-	pyautogui.keyDown(direction)
-	time.sleep(step_time)
-	pyautogui.keyUp(direction)
-	time.sleep(step_pause)
-	
+    pyautogui.keyDown(direction)
+    time.sleep(step_time)
+    pyautogui.keyUp(direction)
+    time.sleep(step_pause)
 
 def move(direction, steps):
-	global facing
-	
-	if direction != facing:
-		press_direction(direction)
-		facing = direction
-	for step in range(steps):
-		press_direction(direction)
-	
-print("Starting in 5 seconds...")
-time.sleep(5)
+    global facing
+
+    if direction != facing:
+        press_direction(direction)
+        facing = direction
+
+    for step in range(steps):
+        press_direction(direction)
 
 def center_to_gym():
 	global facing
@@ -47,11 +46,11 @@ def gym_entrance_to_trainer():
 	move("left", 3)
 	move("up", 2)
 	press_a()
-	move("up", 6)
+	move("up", 7)
 
-
-	
+print("Starting in 5 seconds...")
+time.sleep(5)
+center_to_gym()		
 gym_entrance_to_trainer()	
-	
 
 
